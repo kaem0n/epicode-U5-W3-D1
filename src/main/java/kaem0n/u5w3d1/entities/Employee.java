@@ -26,6 +26,7 @@ public class Employee {
     private String surname;
     private String email;
     private String avatarUrl;
+    private String password;
     @OneToMany(mappedBy = "employee")
     @JsonIgnore
     private List<Device> assignedDevices;

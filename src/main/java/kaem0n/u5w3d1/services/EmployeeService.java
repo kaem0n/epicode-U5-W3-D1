@@ -67,4 +67,8 @@ public class EmployeeService {
         ed.save(found);
         return found;
     }
+
+    public Employee findByUsername(String username) {
+        return ed.findByUsername(username).orElseThrow(() -> new NotFoundException("Username '" + username + "' not found."));
+    }
 }
