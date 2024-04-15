@@ -41,4 +41,10 @@ public class ExceptionManager {
     public ErrorResponseDTO handleMissingRequestParameter(MissingServletRequestParameterException e) {
         return new ErrorResponseDTO(e.getMessage() + ".", LocalDateTime.now());
     }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponseDTO handleUnauthorized(UnauthorizedException e) {
+        return new ErrorResponseDTO(e.getMessage(), LocalDateTime.now());
+    }
 }
