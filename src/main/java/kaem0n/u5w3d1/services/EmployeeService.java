@@ -38,7 +38,7 @@ public class EmployeeService {
     public Employee save(EmployeeDTO payload) {
         if (ed.existsByEmail(payload.email())) throw new BadRequestException("Email " + payload.email() + " is already taken.");
         else {
-            Employee newEmployee = new Employee(payload.username(), payload.name(), payload.surname(), payload.email());
+            Employee newEmployee = new Employee(payload.username(), payload.name(), payload.surname(), payload.email(), payload.password());
             newEmployee.setAvatarUrl("https://ui-avatars.com/api/?name=" + payload.name() + "+" + payload.surname());
             return ed.save(newEmployee);
         }
@@ -54,6 +54,7 @@ public class EmployeeService {
         found.setUsername(payload.username());
         found.setName(payload.name());
         found.setSurname(payload.surname());
+        found.setPassword(payload.password());
         if (found.getAvatarUrl().contains("ui-avatars.com")) found.setAvatarUrl("https://ui-avatars.com/api/?name=" + payload.name() + "+" + payload.surname());
         if (!Objects.equals(found.getEmail(), payload.email()) && !ed.existsByEmail(payload.email())) found.setEmail(payload.email());
         else if (!Objects.equals(found.getEmail(), payload.email()) && ed.existsByEmail(payload.email())) throw new BadRequestException("Email " + payload.email() + " is already taken.");
